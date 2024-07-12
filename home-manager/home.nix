@@ -104,4 +104,18 @@ in
       ".ipynb_checkpoints"
     ];
   };
+
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "GitHub" = {
+        host = "github.com";
+        identityFile = gitHubPublicSshPath;
+        extraOptions = {
+          AddKeysToAgent = "yes";
+          UseKeychain = "yes";
+        };
+      };
+    };
+  };
 }
