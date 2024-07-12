@@ -132,6 +132,39 @@ in
     '';
   };
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode"
+  ];
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    keybindings = [
+        {
+            "key" = "ctrl+tab";
+            "command" = "workbench.action.nextEditorInGroup";
+        }
+        {
+            "key" = "ctrl+shift+tab";
+            "command" = "workbench.action.previousEditorInGroup";
+        }
+    ];
+    extensions = [
+      pkgs.vscode-extensions.bbenoist.nix
+    ];
+    userSettings = {
+      "editor.multiCursorModifier" = "ctrlCmd";
+      "editor.formatOnPaste" = true;
+      "editor.scrollBeyondLastLine" = false;
+      "editor.acceptSuggestionOnEnter" = "off";
+      "files.defaultLanguage" = "Markdown";
+      "files.insertFinalNewline" = true;
+      "files.trimFinalNewlines" = true;
+      "window.restoreWindows" = "none";
+      "workbench.startupEditor" = "none";
+      "workbench.activityBar.location" = "hidden";
+    };
+  };
+
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
