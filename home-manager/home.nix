@@ -24,9 +24,13 @@ in
 
       nixpkgs-fmt
 
-      # (writeShellScriptBin "banana" ''
-      #   echo "Hello, ${config.home.username}!"
-      # '')
+      (writeShellScriptBin "venv" ''
+        python -m venv venv
+        source venv/bin/activate
+
+        python -m pip install --upgrade pip
+        pip install black pylint
+      '')
     ];
 
     activation = {
