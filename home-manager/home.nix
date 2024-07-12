@@ -118,4 +118,8 @@ in
       };
     };
   };
+
+  programs.tmux = {
+    enable = true;
+  };
 }
