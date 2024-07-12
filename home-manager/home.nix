@@ -2,6 +2,7 @@
 let 
   homeDirectory = "/Users/miliu";
   globalVenvDir = "${homeDirectory}/.venv";
+  gitHubPublicSshPath = "${homeDirectory}/.ssh/github";
 in
 {
   programs.home-manager.enable = true;
@@ -40,5 +41,67 @@ in
         python -m pip install --upgrade pip
       '';
     };
+  };
+  
+  programs.git = {
+    enable = true;
+    aliases = {
+      alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
+      afet = "fetch --all --prune";
+      acom = "commit --amend --no-edit";
+      ares = "reset --hard HEAD";
+    };
+    userEmail = "miliu@protonmail.com";
+    userName = "Michael Liu";
+    signing = {
+      key = "${gitHubPublicSshPath}.pub";
+      signByDefault = true;
+    };
+    extraConfig = {
+      gpg.format = "ssh";
+      init.defaultBranch = "main";
+      push.default = "current";
+    };
+    ignores = [
+      # Compiled source
+      "*.com"
+      "*.class"
+      "*.dll"
+      "*.exe"
+      "*.o"
+      "*.pyc"
+      "*.so"
+
+      # Packages
+      "*.7z"
+      "*.dmg"
+      "*.gz"
+      "*.iso"
+      "*.jar"
+      "*.rar"
+      "*.tar"
+      "*.zip"
+
+      # Logs and databases
+      "*.log"
+      "*.sql"
+      "*.sqlite"
+
+      # Caches
+      ".sass-cache"
+      "__pycache__"
+
+      # OS generated files
+      ".DS_Store"
+      ".DS_Store?"
+      "._*"
+      ".Spotlight-V100"
+      ".Trashes"
+      "ehthumbs.db"
+      "Thumbs.db"
+
+      # Jupyter Notebook checkpoints
+      ".ipynb_checkpoints"
+    ];
   };
 }
