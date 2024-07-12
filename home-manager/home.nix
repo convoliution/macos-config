@@ -23,14 +23,6 @@ in
       wget
 
       nixpkgs-fmt
-
-      (writeShellScriptBin "venv" ''
-        python -m venv venv
-        source venv/bin/activate
-
-        python -m pip install --upgrade pip
-        pip install black pylint
-      '')
     ];
 
     activation = {
@@ -180,6 +172,15 @@ in
     initExtraBeforeCompInit = ''
       bindkey \^U backward-kill-line
     '';
+    shellAliases = {
+      venv = ''
+        python -m venv venv \
+          && source venv/bin/activate \
+          && python -m pip install --upgrade pip \
+          && pip install black pylint \
+          && if [ -e requirements.txt ]; then python -m pip install -r requirements.txt; fi
+      '';
+    };
     initExtra = ''
       source ${globalVenvDir}/bin/activate
     '';
