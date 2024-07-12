@@ -131,4 +131,15 @@ in
       set ruler
     '';
   };
+
+  programs.zsh = {
+    enable = true;
+    defaultKeymap = "emacs";
+    initExtraBeforeCompInit = ''
+      bindkey \^U backward-kill-line
+    '';
+    initExtra = ''
+      source ${globalVenvDir}/bin/activate
+    '';
+  };
 }
