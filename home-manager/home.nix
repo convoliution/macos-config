@@ -155,6 +155,7 @@ in
     userSettings = {
       "editor.multiCursorModifier" = "ctrlCmd";
       "editor.formatOnPaste" = true;
+      "editor.formatOnSave" = true;
       "editor.scrollBeyondLastLine" = false;
       "editor.acceptSuggestionOnEnter" = "off";
       "files.defaultLanguage" = "Markdown";
