@@ -122,4 +122,13 @@ in
   programs.tmux = {
     enable = true;
   };
+
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+    extraConfig = ''
+      syntax on
+      set ruler
+    '';
+  };
 }
