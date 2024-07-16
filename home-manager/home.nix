@@ -151,6 +151,9 @@ in
     ];
     extensions = [
       pkgs.vscode-extensions.bbenoist.nix
+      pkgs.vscode-extensions.ms-python.python
+      # pkgs.vscode-extensions.ms-python.vscode-pylance
+      pkgs.vscode-extensions.ms-python.black-formatter
     ];
     userSettings = {
       "editor.multiCursorModifier" = "ctrlCmd";
@@ -161,6 +164,9 @@ in
       "files.defaultLanguage" = "Markdown";
       "files.insertFinalNewline" = true;
       "files.trimFinalNewlines" = true;
+      "[python]" = {
+        "editor.defaultFormatter" = "ms-python.black-formatter";
+      };
       "window.restoreWindows" = "none";
       "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "hidden";
@@ -174,6 +180,7 @@ in
       bindkey \^U backward-kill-line
     '';
     shellAliases = {
+      python3 = "python";
       venv = ''
         python -m venv venv \
           && source venv/bin/activate \
