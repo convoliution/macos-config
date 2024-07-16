@@ -37,6 +37,13 @@ in
         python -m pip install --upgrade pip
       '';
     };
+
+    file = {
+      ".mypy.ini".text = ''
+        [mypy]
+        plugins = pydantic.mypy
+      '';
+    };
   };
 
   # TODO
