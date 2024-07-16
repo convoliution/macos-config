@@ -149,11 +149,12 @@ in
             "command" = "workbench.action.previousEditorInGroup";
         }
     ];
-    extensions = [
-      pkgs.vscode-extensions.bbenoist.nix
-      pkgs.vscode-extensions.ms-python.python
-      # pkgs.vscode-extensions.ms-python.vscode-pylance
-      pkgs.vscode-extensions.ms-python.black-formatter
+    extensions = with pkgs.vscode-extensions; [
+      bbenoist.nix
+      ms-python.python
+      # ms-python.vscode-pylance
+      matangover.mypy
+      charliermarsh.ruff
     ];
     userSettings = {
       "editor.multiCursorModifier" = "ctrlCmd";
@@ -164,12 +165,15 @@ in
       "files.defaultLanguage" = "Markdown";
       "files.insertFinalNewline" = true;
       "files.trimFinalNewlines" = true;
-      "[python]" = {
-        "editor.defaultFormatter" = "ms-python.black-formatter";
-      };
       "window.restoreWindows" = "none";
       "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "hidden";
+
+      "[python]" = {
+        "editor.defaultFormatter" = "charliermarsh.ruff";
+      };
+      "mypy.runUsingActiveInterpreter" = true;
+      "ruff.importStrategy" = "fromEnvironment";
     };
   };
 
@@ -185,7 +189,7 @@ in
         python -m venv venv \
           && source venv/bin/activate \
           && python -m pip install --upgrade pip \
-          && pip install black pylint \
+          && pip install mypy ruff \
           && if [ -e requirements.txt ]; then python -m pip install -r requirements.txt; fi
       '';
     };
