@@ -172,6 +172,7 @@ in
       "files.defaultLanguage" = "Markdown";
       "files.insertFinalNewline" = true;
       "files.trimFinalNewlines" = true;
+      "git.openRepositoryInParentFolders" = "always";
       "window.restoreWindows" = "none";
       "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "hidden";
