@@ -175,6 +175,7 @@ in
       "git.openRepositoryInParentFolders" = "always";
       "window.restoreWindows" = "none";
       "workbench.activityBar.location" = "hidden";
+      "workbench.editor.focusRecentEditorAfterClose" = false;
       "workbench.startupEditor" = "none";
 
       "[python]" = {
