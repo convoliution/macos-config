@@ -164,18 +164,18 @@ in
       charliermarsh.ruff
     ];
     userSettings = {
-      "editor.multiCursorModifier" = "ctrlCmd";
+      "editor.acceptSuggestionOnEnter" = "off";
       "editor.formatOnPaste" = true;
       "editor.formatOnSave" = true;
+      "editor.multiCursorModifier" = "ctrlCmd";
       "editor.scrollBeyondLastLine" = false;
-      "editor.acceptSuggestionOnEnter" = "off";
       "files.defaultLanguage" = "Markdown";
       "files.insertFinalNewline" = true;
       "files.trimFinalNewlines" = true;
       "git.openRepositoryInParentFolders" = "always";
       "window.restoreWindows" = "none";
-      "workbench.startupEditor" = "none";
       "workbench.activityBar.location" = "hidden";
+      "workbench.startupEditor" = "none";
 
       "[python]" = {
         "editor.defaultFormatter" = "charliermarsh.ruff";
