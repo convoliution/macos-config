@@ -193,6 +193,7 @@ in
       bindkey \^U backward-kill-line
     '';
     shellAliases = {
+      code = "code-insiders";
       python3 = "python";
       venv = ''
         python -m venv venv \
