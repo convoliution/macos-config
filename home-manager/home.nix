@@ -2,7 +2,7 @@
 let 
   homeDirectory = "/Users/miliu";
   globalVenvDir = "${homeDirectory}/.venv";
-  gitHubSshPath = "${homeDirectory}/.ssh/github";
+  sshPath = "${homeDirectory}/.ssh/id_ed25519";
 in
 {
   programs.home-manager.enable = true;
@@ -62,7 +62,7 @@ in
     userEmail = "miliu@protonmail.com";
     userName = "Michael Liu";
     signing = {
-      key = "${gitHubSshPath}.pub";
+      key = "${sshPath}.pub";
       signByDefault = true;
     };
     extraConfig = {
@@ -118,7 +118,7 @@ in
     matchBlocks = {
       "GitHub" = {
         host = "github.com";
-        identityFile = gitHubSshPath;
+        identityFile = sshPath;
         extraOptions = {
           AddKeysToAgent = "yes";
           UseKeychain = "yes";
