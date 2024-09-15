@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let 
-  homeDirectory = "/Users/miliu";
+  homeDirectory = "/Users/mika";
   globalVenvDir = "${homeDirectory}/.venv";
   sshPath = "${homeDirectory}/.ssh/id_ed25519";
 in
@@ -10,7 +10,7 @@ in
   home = {
     stateVersion = "24.05";  # DO NOT CHANGE
     
-    username = "miliu";
+    username = "mika";
     homeDirectory = homeDirectory;
     
     packages = with pkgs; [
