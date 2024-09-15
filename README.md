@@ -47,6 +47,11 @@
    rm ~/.ssh/config
    home-manager switch
    ```
+1. install VS Code extensions
+  - bbenoist.nix
+  - ms-python.python
+  - matangover.mypy
+  - charliermarsh.ruff
 
 # TODO
 

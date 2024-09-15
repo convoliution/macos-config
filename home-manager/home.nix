@@ -43,6 +43,41 @@ in
         [mypy]
         plugins = pydantic.mypy
       '';
+      "Library/Application Support/Code - Insiders/User/settings.json".text = ''
+        {
+          "editor.acceptSuggestionOnEnter": "off",
+          "editor.formatOnPaste": true,
+          "editor.formatOnSave": true,
+          "editor.multiCursorModifier": "ctrlCmd",
+          "editor.scrollBeyondLastLine": false,
+          "files.defaultLanguage": "Markdown",
+          "files.insertFinalNewline": true,
+          "files.trimFinalNewlines": true,
+          "git.openRepositoryInParentFolders": "always",
+          "window.restoreWindows": "none",
+          "workbench.activityBar.location": "hidden",
+          "workbench.editor.focusRecentEditorAfterClose": false,
+          "workbench.startupEditor": "none",
+
+          "[python]": {
+            "editor.defaultFormatter": "charliermarsh.ruff"
+          },
+          "mypy.runUsingActiveInterpreter": true,
+          "ruff.importStrategy": "fromEnvironment"
+        }
+      '';
+      "Library/Application Support/Code - Insiders/User/keybindings.json".text = ''
+        [
+          {
+            "key": "ctrl+tab",
+            "command": "workbench.action.nextEditorInGroup"
+          },
+          {
+            "key": "ctrl+shift+tab",
+            "command": "workbench.action.previousEditorInGroup"
+          }
+        ]
+      '';
     };
   };
 
@@ -138,52 +173,6 @@ in
       syntax on
       set ruler
     '';
-  };
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vscode"
-  ];
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    keybindings = [
-        {
-            "key" = "ctrl+tab";
-            "command" = "workbench.action.nextEditorInGroup";
-        }
-        {
-            "key" = "ctrl+shift+tab";
-            "command" = "workbench.action.previousEditorInGroup";
-        }
-    ];
-    extensions = with pkgs.vscode-extensions; [
-      bbenoist.nix
-      ms-python.python
-      # ms-python.vscode-pylance
-      matangover.mypy
-      charliermarsh.ruff
-    ];
-    userSettings = {
-      "editor.acceptSuggestionOnEnter" = "off";
-      "editor.formatOnPaste" = true;
-      "editor.formatOnSave" = true;
-      "editor.multiCursorModifier" = "ctrlCmd";
-      "editor.scrollBeyondLastLine" = false;
-      "files.defaultLanguage" = "Markdown";
-      "files.insertFinalNewline" = true;
-      "files.trimFinalNewlines" = true;
-      "git.openRepositoryInParentFolders" = "always";
-      "window.restoreWindows" = "none";
-      "workbench.activityBar.location" = "hidden";
-      "workbench.editor.focusRecentEditorAfterClose" = false;
-      "workbench.startupEditor" = "none";
-
-      "[python]" = {
-        "editor.defaultFormatter" = "charliermarsh.ruff";
-      };
-      "mypy.runUsingActiveInterpreter" = true;
-      "ruff.importStrategy" = "fromEnvironment";
-    };
   };
 
   programs.zsh = {
