@@ -39,12 +39,16 @@
    ```
 1. clone this repository
    ```zsh
-   rm -r ~/.config
+   mv ~/.config ~/.config.tmp
    git clone git@github.com:convoliution/macos-config.git ~/.config
+   mv ~/.config.tmp/home-manager/flake.* ~/.config/home-manager/.
+   rm -rf ~/.config.tmp
    ```
 1. apply configuration
    ```zsh
-   rm ~/.ssh/config
+   rm -f ~/.ssh/config
+   rm -f ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
+   rm -f ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
    home-manager switch
    ```
 1. install VS Code extensions
