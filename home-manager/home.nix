@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let 
   homeDirectory = "/Users/mika";
-  globalVenvDir = "${homeDirectory}/.venv";
   sshPath = "${homeDirectory}/.ssh/id_ed25519";
 in
 {
@@ -17,26 +16,13 @@ in
       jq
       yq
 
-      python311
+      uv
 
       gnumake
       wget
 
       nixpkgs-fmt
     ];
-
-    activation = {
-      setUpGlobalPythonVenv = lib.hm.dag.entryAfter ["installPackages"] ''
-        PATH="${config.home.path}/bin:$PATH"
-        GLOBAL_VENV_DIR="${globalVenvDir}"
-        
-        rm -rf $GLOBAL_VENV_DIR
-        run python -m venv $GLOBAL_VENV_DIR
-        source $GLOBAL_VENV_DIR/bin/activate
-
-        python -m pip install --upgrade pip
-      '';
-    };
 
     file = {
       ".mypy.ini".text = ''
@@ -179,16 +165,6 @@ in
     shellAliases = {
       code = "code-insiders";
       python3 = "python";
-      venv = ''
-        python -m venv venv \
-          && source venv/bin/activate \
-          && python -m pip install --upgrade pip \
-          && pip install mypy ruff \
-          && if [ -e requirements.txt ]; then python -m pip install -r requirements.txt; fi
-      '';
     };
-    initExtra = ''
-      source ${globalVenvDir}/bin/activate
-    '';
   };
 }
