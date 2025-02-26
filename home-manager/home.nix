@@ -71,9 +71,6 @@ in
     enable = true;
     aliases = {
       alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
-      afet = "fetch --all --prune";
-      acom = "commit --amend --no-edit";
-      ares = "reset --hard HEAD";
     };
     userEmail = "miliu@protonmail.com";
     userName = "Michael Liu";
@@ -82,9 +79,26 @@ in
       signByDefault = true;
     };
     extraConfig = {
+      commit.verbose = "true";
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = "true";
+        renames = "copies";
+      };
+      fetch = {
+        all = "true";
+        prune = "true";
+        pruneTags = "true";
+      };
       gpg.format = "ssh";
+      help.autocorrect = "prompt";
       init.defaultBranch = "main";
-      push.default = "current";
+      merge.conflictstyle = "zdiff3";
+      pull.rebase = "true";
+      push.autoSetupRemote = "true";
+      rebase.updateRefs = "true";
+      tag.sort = "version:refname";
     };
     ignores = [
       # Compiled source
