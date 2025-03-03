@@ -79,6 +79,7 @@ in
       signByDefault = true;
     };
     extraConfig = {
+      advice.detachedHead = "false";
       commit.verbose = "true";
       diff = {
         algorithm = "histogram";
@@ -92,7 +93,6 @@ in
         pruneTags = "true";
       };
       gpg.format = "ssh";
-      help.autocorrect = "prompt";
       init.defaultBranch = "main";
       merge.conflictstyle = "zdiff3";
       pull.rebase = "true";
