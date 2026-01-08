@@ -31,6 +31,7 @@ in
       '';
       "Library/Application Support/Code - Insiders/User/settings.json".text = ''
         {
+          "chat.disableAIFeatures": true,
           "editor.acceptSuggestionOnEnter": "off",
           "editor.formatOnPaste": true,
           "editor.formatOnSave": true,
