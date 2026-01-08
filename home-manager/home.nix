@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }:
-let 
+let
   homeDirectory = "/Users/mika";
   sshPath = "${homeDirectory}/.ssh/id_ed25519";
 in
@@ -8,10 +8,10 @@ in
   news.display = "silent";
   home = {
     stateVersion = "24.05";  # DO NOT CHANGE
-    
+
     username = "mika";
     homeDirectory = homeDirectory;
-    
+
     packages = with pkgs; [
       jq
       yq
@@ -40,6 +40,7 @@ in
           "files.defaultLanguage": "Markdown",
           "files.insertFinalNewline": true,
           "files.trimFinalNewlines": true,
+          "files.trimTrailingWhitespace": true,
           "git.openRepositoryInParentFolders": "always",
           "window.restoreWindows": "none",
           "workbench.activityBar.location": "hidden",
@@ -67,7 +68,7 @@ in
       '';
     };
   };
-  
+
   programs.git = {
     enable = true;
     aliases = {
