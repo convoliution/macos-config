@@ -12,6 +12,10 @@ in
     username = "mika";
     homeDirectory = homeDirectory;
 
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
+
     packages = with pkgs; [
       jq
       yq
