@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  homeDirectory = "/Users/mika";
-  sshPath = "${homeDirectory}/.ssh/id_ed25519";
+  sshPath = "${config.home.homeDirectory}/.ssh/id_ed25519";
 in
 {
   programs.home-manager.enable = true;
@@ -10,7 +9,7 @@ in
     stateVersion = "24.05";  # DO NOT CHANGE
 
     username = "mika";
-    homeDirectory = homeDirectory;
+    homeDirectory = "/Users/mika";
 
     sessionPath = [
       "$HOME/.local/bin"
@@ -185,6 +184,16 @@ in
     shellAliases = {
       code = "code-insiders";
       python3 = "python";
+    };
+  };
+
+  home.activation.createScreenshotsDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.home.homeDirectory}/Pictures/Screenshots
+  '';
+  targets.darwin.defaults = {
+    "com.apple.screencapture" = {
+      location = "~/Pictures/Screenshots";
+      show-thumbnail = false;
     };
   };
 }
