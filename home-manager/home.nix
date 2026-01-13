@@ -3,6 +3,10 @@ let
   sshPath = "${config.home.homeDirectory}/.ssh/id_ed25519";
 in
 {
+  imports = [
+    ./firefox.nix
+  ];
+
   programs.home-manager.enable = true;
   news.display = "silent";
   home = {
@@ -184,97 +188,6 @@ in
     shellAliases = {
       code = "code-insiders";
       python3 = "python";
-    };
-  };
-
-  programs.firefox = {
-    enable = true;
-    package = null;
-    profiles.default = {
-      id = 0;
-      settings = {
-        # startup
-        "browser.startup.homepage" = "about:blank";
-        "browser.startup.page" = 3;  # restore previous session
-
-        # blank new tabs
-        "browser.newtabpage.enabled" = false;
-        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
-        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
-        "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-        "browser.newtabpage.activity-stream.feeds.topsites" = false;
-        "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
-        "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
-        "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
-        "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
-        "browser.newtabpage.activity-stream.showSearch" = false;
-        "browser.newtabpage.activity-stream.showWeather" = false;
-
-        # search
-        "browser.urlbar.placeholderName" = "DuckDuckGo";
-        "browser.urlbar.placeholderName.private" = "DuckDuckGo";
-        "browser.search.region" = "US";
-        "browser.search.suggest.enabled" = false;
-        "browser.urlbar.suggest.bookmark" = false;
-        "browser.urlbar.suggest.engines" = false;
-        "browser.urlbar.suggest.openpage" = false;
-        "browser.urlbar.suggest.quickactions" = false;
-        "browser.urlbar.suggest.quicksuggest.all" = false;
-        "browser.urlbar.suggest.recentsearches" = false;
-        "browser.urlbar.suggest.searches" = false;
-        "browser.urlbar.suggest.topsites" = false;
-
-        # privacy
-        "dom.security.https_only_mode" = true;
-        "privacy.globalprivacycontrol.enabled" = true;
-        "privacy.trackingprotection.enabled" = true;
-        "privacy.trackingprotection.emailtracking.enabled" = true;
-        "privacy.trackingprotection.socialtracking.enabled" = true;
-        "privacy.fingerprintingProtection" = true;
-        "privacy.query_stripping.enabled" = true;
-        "privacy.query_stripping.enabled.pbmode" = true;
-        "browser.contentblocking.category" = "strict";
-
-        # DNS over HTTPS
-        "network.trr.mode" = 3;  # always
-        "network.trr.uri" = "https://mozilla.cloudflare-dns.com/dns-query";
-        "doh-rollout.disable-heuristics" = true;
-
-        # general behavior
-        "browser.tabs.warnOnClose" = true;
-        "browser.bookmarks.showMobileBookmarks" = false;
-        "findbar.highlightAll" = true;
-        "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
-        "sidebar.visibility" = "hide-sidebar";
-
-        # developer tools
-        "devtools.command-button-screenshot.enabled" = true;
-        "devtools.application.enabled" = false;
-        "devtools.memory.enabled" = false;
-        "devtools.styleeditor.enabled" = false;
-
-        # disable autofill
-        "browser.formfill.enable" = false;
-        "extensions.formautofill.addresses.enabled" = false;
-        "extensions.formautofill.creditCards.enabled" = false;
-
-        # disable password manager
-        "signon.rememberSignons" = false;
-
-        # disable extension recommendations
-        "browser.discovery.enabled" = false;
-
-        # disable studies
-        "app.shield.optoutstudies.enabled" = false;
-
-        # disable AI
-        "browser.tabs.groups.smart.userEnabled" = false;
-        "browser.ml.chat.menu" = false;
-        "browser.ml.linkPreview.enabled" = false;
-
-        # crash reports
-        "browser.crashReports.unsubmittedCheck.autoSubmit2" = true;
-      };
     };
   };
 
