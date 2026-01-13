@@ -110,7 +110,7 @@ in
       tag.sort = "version:refname";
     };
     ignores = [
-      # compiled source
+      # Compiled source
       "*.com"
       "*.class"
       "*.dll"
@@ -119,7 +119,7 @@ in
       "*.pyc"
       "*.so"
 
-      # packages
+      # Packages
       "*.7z"
       "*.dmg"
       "*.gz"
@@ -129,12 +129,12 @@ in
       "*.tar"
       "*.zip"
 
-      # logs and databases
+      # Logs and databases
       "*.log"
       "*.sql"
       "*.sqlite"
 
-      # caches
+      # Caches
       ".sass-cache"
       "__pycache__"
 
