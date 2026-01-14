@@ -68,7 +68,6 @@ mkdir -p ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 nix flake init -t nix-darwin
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
-sed -i '' "s/x86_64-darwin/aarch64-darwin/" flake.nix
 nix run nix-darwin -- switch --flake ~/.config/nix-darwin
 ```
 
