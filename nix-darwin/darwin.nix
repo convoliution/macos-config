@@ -8,6 +8,10 @@
 
     # Scroll & Zoom
     "com.apple.swipescrolldirection" = true;  # Natural scrolling
+
+    # Keyboard
+    KeyRepeat = 2;
+    InitialKeyRepeat = 15;
   };
   system.defaults.trackpad  = {
     # Point & Click
@@ -38,5 +42,19 @@
     # four-finger spread/pinch gestures
     showDesktopGestureEnabled = true;
     showLaunchpadGestureEnabled = false;
-  }
+
+    # Dock
+    magnification = false;
+    orientation = "left";
+    minimize-to-application = false;
+    autohide = true;
+    launchanim = true;
+    show-process-indicators = true;
+    show-recents = false;
+
+    mru-spaces = false;
+  };
+  system.defaults.WindowManager = {
+    EnableStandardClickToShowDesktop = false;
+  };
 }
