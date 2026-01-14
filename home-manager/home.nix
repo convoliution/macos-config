@@ -3,6 +3,10 @@ let
   sshPath = "${config.home.homeDirectory}/.ssh/id_ed25519";
 in
 {
+  imports = [
+    ./firefox.nix
+  ];
+
   programs.home-manager.enable = true;
   news.display = "silent";
   home = {
