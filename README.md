@@ -2,7 +2,7 @@
 
 1. generate SSH key for laptop
    ```zsh
-   ssh-keygen -t ed25519 -C "email@protonmail.com"
+   ssh-keygen -t ed25519 -C "email@provider.tld"
    ```
 1. configure `ssh-agent` to manage key
    ```zsh
