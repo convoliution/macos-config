@@ -1,8 +1,5 @@
-/**
+/git/
+/tmux/
+
 flake.lock
 flake.nix
-
-!/home-manager
-!/nix-darwin
-!.gitignore
-!README.md
