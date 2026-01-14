@@ -1,5 +1,8 @@
 /*
 
+/home-manager/*
+!/home-manager
 !/home-manager/home.nix
+!/home-manager/git.nix
 !.gitignore
 !README.md
