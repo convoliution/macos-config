@@ -5,7 +5,7 @@ in
 {
   imports = [
     ./firefox.nix
-    ./git.nix
+    (import ./git.nix { inherit sshPath; })
   ];
 
   programs.home-manager.enable = true;

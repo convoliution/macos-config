@@ -5,3 +5,4 @@
 /home-manager/flake.nix
 !.gitignore
 !README.md
+/home-manager/result

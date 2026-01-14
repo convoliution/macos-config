@@ -1,5 +1,5 @@
+{ sshPath }:
 { config, lib, pkgs, ... }:
-
 {
   programs.git = {
     enable = true;
@@ -9,7 +9,7 @@
     userEmail = "miliu@protonmail.com";
     userName = "Michael Liu";
     signing = {
-      key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      key = "${sshPath}.pub";
       signByDefault = true;
     };
     extraConfig = {
