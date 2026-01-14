@@ -1,7 +1,8 @@
-/*
+/**
+flake.lock
+flake.nix
 
 !/home-manager
-/home-manager/flake.lock
-/home-manager/flake.nix
+!/nix-darwin
 !.gitignore
 !README.md
