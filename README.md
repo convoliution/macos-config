@@ -47,8 +47,6 @@
 1. apply configuration
    ```zsh
    rm -f ~/.ssh/config
-   rm -f ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
-   rm -f ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
    home-manager switch
    ```
 1. install VS Code extensions
