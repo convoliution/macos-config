@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    ./firefox.nix
     ./git.nix
   ];
 
