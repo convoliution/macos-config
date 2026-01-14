@@ -68,7 +68,7 @@ mkdir -p ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 nix flake init -t nix-darwin
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
-nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+sudo -H nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake path:$HOME/.config/nix-darwin
 ```
 
 ### [Configuration](https://daiderd.com/nix-darwin/manual/index.html)
