@@ -1,9 +1,7 @@
 /*
 
-/home-manager/*
 !/home-manager
-!/home-manager/firefox.nix
-!/home-manager/git.nix
-!/home-manager/home.nix
+/home-manager/flake.lock
+/home-manager/flake.nix
 !.gitignore
 !README.md
