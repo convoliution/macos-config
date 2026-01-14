@@ -43,7 +43,7 @@ let
     user_pref("privacy.fingerprintingProtection", true);
     user_pref("privacy.query_stripping.enabled", true);
     user_pref("privacy.query_stripping.enabled.pbmode", true);
-    user_pref("browser.contentblocking.category", "strict");
+    user_pref("browser.contentblocking.category", "standard");
 
     // DNS over HTTPS
     user_pref("network.trr.mode", 3);  // always
@@ -53,6 +53,7 @@ let
     // general behavior
     user_pref("browser.tabs.warnOnClose", true);
     user_pref("browser.bookmarks.showMobileBookmarks", false);
+    user_pref("browser.link.open_newwindow.override.external", 7);  // open links from apps next to active tab
     user_pref("findbar.highlightAll", true);
     user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
     user_pref("sidebar.visibility", "hide-sidebar");
@@ -70,6 +71,7 @@ let
 
     // disable password manager
     user_pref("signon.rememberSignons", false);
+    user_pref("signon.management.page.breach-alerts.enabled", false);  // no password breach alerts
 
     // disable extension recommendations
     user_pref("browser.discovery.enabled", false);
