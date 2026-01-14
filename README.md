@@ -68,6 +68,9 @@ mkdir -p ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 nix flake init -t nix-darwin
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
+sed -i '' 's/modules = \[ configuration \]/modules = [ configuration .\/darwin.nix ]/' flake.nix
+sed -i '' '/# List packages installed in system profile./,/];/d' flake.nix
+sed -i '' '/# Enable alternative shell support/,/= true;/d' flake.nix
 sudo -H nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake path:$HOME/.config/nix-darwin
 ```
 
