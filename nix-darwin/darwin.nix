@@ -1,5 +1,7 @@
 { config, lib, ... }:
 {
+  system.primaryUser = "mika";
+
   system.defaults = {
     NSGlobalDomain = {
       # Point & Click
