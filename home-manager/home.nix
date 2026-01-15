@@ -5,11 +5,6 @@ let
   sshPath = "${config.home.homeDirectory}/.ssh/id_ed25519";
 in
 {
-  imports = [
-    ./firefox.nix
-    (import ./git.nix { inherit sshPath email; })
-  ];
-
   programs.home-manager.enable = true;
   news.display = "silent";
   home = {
@@ -39,44 +34,93 @@ in
         [mypy]
         plugins = pydantic.mypy
       '';
-      "Library/Application Support/Code - Insiders/User/settings.json".text = ''
-        {
-          "chat.disableAIFeatures": true,
-          "editor.acceptSuggestionOnEnter": "off",
-          "editor.formatOnPaste": true,
-          "editor.formatOnSave": true,
-          "editor.multiCursorModifier": "ctrlCmd",
-          "editor.scrollBeyondLastLine": false,
-          "files.defaultLanguage": "Markdown",
-          "files.insertFinalNewline": true,
-          "files.trimFinalNewlines": true,
-          "files.trimTrailingWhitespace": true,
-          "git.openRepositoryInParentFolders": "always",
-          "window.restoreWindows": "none",
-          "workbench.activityBar.location": "hidden",
-          "workbench.editor.focusRecentEditorAfterClose": false,
-          "workbench.startupEditor": "none",
 
-          "[python]": {
-            "editor.defaultFormatter": "charliermarsh.ruff"
-          },
-          "mypy.runUsingActiveInterpreter": true,
-          "ruff.importStrategy": "fromEnvironment"
-        }
-      '';
-      "Library/Application Support/Code - Insiders/User/keybindings.json".text = ''
-        [
-          {
-            "key": "ctrl+tab",
-            "command": "workbench.action.nextEditorInGroup"
-          },
-          {
-            "key": "ctrl+shift+tab",
-            "command": "workbench.action.previousEditorInGroup"
-          }
-        ]
-      '';
+      "Library/Application Support/Code/User/settings.json".source = ./configs/vs-code/settings.json;
+      "Library/Application Support/Code/User/keybindings.json".source = ./configs/vs-code/keybindings.json;
+      "Library/Application Support/Code - Insiders/User/settings.json".source = ./configs/vs-code/settings.json;
+      "Library/Application Support/Code - Insiders/User/keybindings.json".source = ./configs/vs-code/keybindings.json;
+
+      "Library/Application Support/Firefox/installs.ini".source = ./configs/firefox/installs.ini;
+      "Library/Application Support/Firefox/profiles.ini".source = ./configs/firefox/profiles.ini;
+      "Library/Application Support/Firefox/Profiles/default/user.js".source = ./configs/firefox/user.js;
+      "Library/Application Support/Firefox/Profiles/nightly/user.js".source = ./configs/firefox/user.js;
     };
+  };
+
+  programs.git = {
+    enable = true;
+    aliases = {
+      alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
+    };
+    userEmail = email;
+    userName = "Michael Liu";
+    signing = {
+      key = "${sshPath}.pub";
+      signByDefault = true;
+    };
+    extraConfig = {
+      advice.detachedHead = "false";
+      commit.verbose = "true";
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = "true";
+        renames = "copies";
+      };
+      fetch = {
+        all = "true";
+        prune = "true";
+        pruneTags = "true";
+      };
+      gpg.format = "ssh";
+      init.defaultBranch = "main";
+      merge.conflictstyle = "zdiff3";
+      pull.rebase = "true";
+      push.autoSetupRemote = "true";
+      rebase.updateRefs = "true";
+      tag.sort = "version:refname";
+    };
+    ignores = [
+      # compiled source
+      "*.com"
+      "*.class"
+      "*.dll"
+      "*.exe"
+      "*.o"
+      "*.pyc"
+      "*.so"
+
+      # packages
+      "*.7z"
+      "*.dmg"
+      "*.gz"
+      "*.iso"
+      "*.jar"
+      "*.rar"
+      "*.tar"
+      "*.zip"
+
+      # logs and databases
+      "*.log"
+      "*.sql"
+      "*.sqlite"
+
+      # caches
+      ".sass-cache"
+      "__pycache__"
+
+      # OS generated files
+      ".DS_Store"
+      ".DS_Store?"
+      "._*"
+      ".Spotlight-V100"
+      ".Trashes"
+      "ehthumbs.db"
+      "Thumbs.db"
+
+      # Jupyter Notebook checkpoints
+      ".ipynb_checkpoints"
+    ];
   };
 
   programs.ssh = {

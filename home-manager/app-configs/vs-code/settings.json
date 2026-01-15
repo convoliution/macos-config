@@ -1,0 +1,22 @@
+{
+  "chat.disableAIFeatures": true,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.scrollBeyondLastLine": false,
+  "files.defaultLanguage": "Markdown",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.openRepositoryInParentFolders": "always",
+  "window.restoreWindows": "none",
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.focusRecentEditorAfterClose": false,
+  "workbench.startupEditor": "none",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "mypy.runUsingActiveInterpreter": true,
+  "ruff.importStrategy": "fromEnvironment"
+}
