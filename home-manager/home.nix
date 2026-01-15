@@ -56,16 +56,14 @@ in
 
   programs.git = {
     enable = true;
-    aliases = {
-      alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
-    };
-    userEmail = email;
-    userName = "Michael Liu";
-    signing = {
-      key = "${sshPath}.pub";
-      signByDefault = true;
-    };
-    extraConfig = {
+    settings = {
+      alias = {
+        alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
+      };
+      user = {
+        inherit email;
+        name = "Michael Liu";
+      };
       advice.detachedHead = "false";
       commit.verbose = "true";
       diff = {
@@ -86,6 +84,10 @@ in
       push.autoSetupRemote = "true";
       rebase.updateRefs = "true";
       tag.sort = "version:refname";
+    };
+    signing = {
+      key = "${sshPath}.pub";
+      signByDefault = true;
     };
     ignores = [
       # compiled source
