@@ -3,6 +3,8 @@ let
   username = "mika";
 in
 {
+  nix.enable = false;
+
   system.primaryUser = username;
 
   system.defaults = {
