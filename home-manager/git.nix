@@ -1,4 +1,4 @@
-{ sshPath }:
+{ sshPath, email }:
 { config, lib, pkgs, ... }:
 {
   programs.git = {
@@ -6,7 +6,7 @@
     aliases = {
       alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
     };
-    userEmail = "miliu@protonmail.com";
+    userEmail = email;
     userName = "Michael Liu";
     signing = {
       key = "${sshPath}.pub";

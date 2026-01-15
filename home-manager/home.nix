@@ -1,12 +1,13 @@
 { config, lib, pkgs, ... }:
 let
   username = "mika";
+  email = "hello@convoliution.com";
   sshPath = "${config.home.homeDirectory}/.ssh/id_ed25519";
 in
 {
   imports = [
     ./firefox.nix
-    (import ./git.nix { inherit sshPath; })
+    (import ./git.nix { inherit sshPath email; })
   ];
 
   programs.home-manager.enable = true;

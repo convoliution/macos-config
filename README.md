@@ -49,6 +49,7 @@
    mv ~/.config.tmp/home-manager/flake.* ~/.config/home-manager/.
    rm -rf ~/.config.tmp
    ```
+1. set variables at the top of `home.nix`
 1. apply configuration
    ```zsh
    rm -f ~/.ssh/config
@@ -72,6 +73,7 @@
     sed -i '' '/# List packages installed in system profile./,/];/ d' flake.nix
     sed -i '' '/# Enable alternative shell support/,/= true;/d'  flake.nix
     ```
+1. set variables at the top of `darwin.nix`
 1. apply configuration
     ```zsh
     sudo -H nix run nix-darwin/nix-darwin-25.05#darwin-rebuild --  switch --flake path:$HOME/.config/nix-darwin
