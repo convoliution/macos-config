@@ -8,7 +8,14 @@ in
   programs.home-manager.enable = true;
   news.display = "silent";
   home = {
-    stateVersion = "24.05";  # DO NOT CHANGE
+    # This value determines the Home Manager release that your configuration is
+    # compatible with. This helps avoid breakage when a new Home Manager release
+    # introduces backwards incompatible changes.
+    #
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
+    stateVersion = "25.11"; # Please read the comment before changing.
 
     inherit username;
     homeDirectory = "/Users/${username}";
@@ -49,16 +56,14 @@ in
 
   programs.git = {
     enable = true;
-    aliases = {
-      alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
-    };
-    userEmail = email;
-    userName = "Michael Liu";
-    signing = {
-      key = "${sshPath}.pub";
-      signByDefault = true;
-    };
-    extraConfig = {
+    settings = {
+      alias = {
+        alog = "log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(bold blue)%ar%C(reset)%C(auto)%d%C(reset)%n%w(72,10,10)%C(white)%s%C(reset)%n%C(dim white)%an%C(reset)'";
+      };
+      user = {
+        inherit email;
+        name = "Michael Liu";
+      };
       advice.detachedHead = "false";
       commit.verbose = "true";
       diff = {
@@ -79,6 +84,10 @@ in
       push.autoSetupRemote = "true";
       rebase.updateRefs = "true";
       tag.sort = "version:refname";
+    };
+    signing = {
+      key = "${sshPath}.pub";
+      signByDefault = true;
     };
     ignores = [
       # compiled source
@@ -125,6 +134,7 @@ in
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "GitHub" = {
         host = "github.com";
@@ -153,7 +163,7 @@ in
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
-    initExtraBeforeCompInit = ''
+    initContent = lib.mkOrder 550 ''
       bindkey \^U backward-kill-line
     '';
     shellAliases = {
