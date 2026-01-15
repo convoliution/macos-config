@@ -39,6 +39,7 @@ in
         [mypy]
         plugins = pydantic.mypy
       '';
+
       "Library/Application Support/Code/User/settings.json".source =
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/settings.json";
       "Library/Application Support/Code/User/keybindings.json".source =
@@ -47,6 +48,15 @@ in
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/settings.json";
       "Library/Application Support/Code - Insiders/User/keybindings.json".source =
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/keybindings.json";
+
+      "Library/Application Support/Firefox/installs.ini".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/installs.ini";
+      "Library/Application Support/Firefox/profiles.ini".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/profiles.ini";
+      "Library/Application Support/Firefox/Profiles/default/user.js".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/user.js";
+      "Library/Application Support/Firefox/Profiles/nightly/user.js".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/user.js";
     };
   };
 
