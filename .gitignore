@@ -1,7 +1,5 @@
-/*
+/git/
+/tmux/
 
-!/home-manager
-/home-manager/flake.lock
-/home-manager/flake.nix
-!.gitignore
-!README.md
+flake.lock
+flake.nix

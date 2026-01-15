@@ -1,8 +1,10 @@
-# new laptop setup
+# New Laptop Setup
+
+## Dependencies
 
 1. generate SSH key for laptop
    ```zsh
-   ssh-keygen -t ed25519 -C "email@protonmail.com"
+   ssh-keygen -t ed25519 -C "email@provider.tld"
    ```
 1. configure `ssh-agent` to manage key
    ```zsh
@@ -26,6 +28,9 @@
    ```zsh
    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
    ```
+
+## [Home Manager](https://nix-community.github.io/home-manager/options.xhtml)
+
 1. [install Home Manager](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone)
    ```zsh
    nix run home-manager/master -- init --switch
@@ -47,8 +52,6 @@
 1. apply configuration
    ```zsh
    rm -f ~/.ssh/config
-   rm -f ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
-   rm -f ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
    home-manager switch
    ```
 1. install VS Code extensions
@@ -57,23 +60,19 @@
     - matangover.mypy
     - charliermarsh.ruff
 
-# TODO
+## [nix-darwin](https://nix-darwin.github.io/nix-darwin/manual/index.html)
 
-## [`nix-darwin`](https://github.com/LnL7/nix-darwin)
-
-System-level configuration management.
-
-### [Installation](https://github.com/LnL7/nix-darwin?tab=readme-ov-file#flakes)
-
-```zsh
-mkdir -p ~/.config/nix-darwin
-cd ~/.config/nix-darwin
-nix flake init -t nix-darwin
-sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
-sed -i '' "s/x86_64-darwin/aarch64-darwin/" flake.nix
-nix run nix-darwin -- switch --flake ~/.config/nix-darwin
-```
-
-### [Configuration](https://daiderd.com/nix-darwin/manual/index.html)
-
-???
+1.  [install nix-darwin](https://github.com/nix-darwin/nix-darwin?tab=readme-ov-file#step-1-creating-flakenix)
+    ```zsh
+    mkdir -p ~/.config/nix-darwin
+    cd ~/.config/nix-darwin
+    nix flake init -t nix-darwin
+    sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
+    sed -i '' 's/modules = \[ configuration \]/modules = [  configuration .\/darwin.nix ]/' flake.nix
+    sed -i '' '/# List packages installed in system profile./,/];/ d' flake.nix
+    sed -i '' '/# Enable alternative shell support/,/= true;/d'  flake.nix
+    ```
+1. apply configuration
+    ```zsh
+    sudo -H nix run nix-darwin/nix-darwin-25.05#darwin-rebuild --  switch --flake path:$HOME/.config/nix-darwin
+    ```
