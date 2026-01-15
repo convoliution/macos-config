@@ -39,43 +39,14 @@ in
         [mypy]
         plugins = pydantic.mypy
       '';
-      "Library/Application Support/Code - Insiders/User/settings.json".text = ''
-        {
-          "chat.disableAIFeatures": true,
-          "editor.acceptSuggestionOnEnter": "off",
-          "editor.formatOnPaste": true,
-          "editor.formatOnSave": true,
-          "editor.multiCursorModifier": "ctrlCmd",
-          "editor.scrollBeyondLastLine": false,
-          "files.defaultLanguage": "Markdown",
-          "files.insertFinalNewline": true,
-          "files.trimFinalNewlines": true,
-          "files.trimTrailingWhitespace": true,
-          "git.openRepositoryInParentFolders": "always",
-          "window.restoreWindows": "none",
-          "workbench.activityBar.location": "hidden",
-          "workbench.editor.focusRecentEditorAfterClose": false,
-          "workbench.startupEditor": "none",
-
-          "[python]": {
-            "editor.defaultFormatter": "charliermarsh.ruff"
-          },
-          "mypy.runUsingActiveInterpreter": true,
-          "ruff.importStrategy": "fromEnvironment"
-        }
-      '';
-      "Library/Application Support/Code - Insiders/User/keybindings.json".text = ''
-        [
-          {
-            "key": "ctrl+tab",
-            "command": "workbench.action.nextEditorInGroup"
-          },
-          {
-            "key": "ctrl+shift+tab",
-            "command": "workbench.action.previousEditorInGroup"
-          }
-        ]
-      '';
+      "Library/Application Support/Code/User/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/settings.json";
+      "Library/Application Support/Code/User/keybindings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/keybindings.json";
+      "Library/Application Support/Code - Insiders/User/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/settings.json";
+      "Library/Application Support/Code - Insiders/User/keybindings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/vs-code/keybindings.json";
     };
   };
 
