@@ -35,15 +35,15 @@ in
         plugins = pydantic.mypy
       '';
 
-      "Library/Application Support/Code/User/settings.json".source = ./configs/vs-code/settings.json;
-      "Library/Application Support/Code/User/keybindings.json".source = ./configs/vs-code/keybindings.json;
-      "Library/Application Support/Code - Insiders/User/settings.json".source = ./configs/vs-code/settings.json;
-      "Library/Application Support/Code - Insiders/User/keybindings.json".source = ./configs/vs-code/keybindings.json;
+      "Library/Application Support/Code/User/settings.json".source = ./app-configs/vs-code/settings.json;
+      "Library/Application Support/Code/User/keybindings.json".source = ./app-configs/vs-code/keybindings.json;
+      "Library/Application Support/Code - Insiders/User/settings.json".source = ./app-configs/vs-code/settings.json;
+      "Library/Application Support/Code - Insiders/User/keybindings.json".source = ./app-configs/vs-code/keybindings.json;
 
-      "Library/Application Support/Firefox/installs.ini".source = ./configs/firefox/installs.ini;
-      "Library/Application Support/Firefox/profiles.ini".source = ./configs/firefox/profiles.ini;
-      "Library/Application Support/Firefox/Profiles/default/user.js".source = ./configs/firefox/user.js;
-      "Library/Application Support/Firefox/Profiles/nightly/user.js".source = ./configs/firefox/user.js;
+      "Library/Application Support/Firefox/installs.ini".source = ./app-configs/firefox/installs.ini;
+      "Library/Application Support/Firefox/profiles.ini".source = ./app-configs/firefox/profiles.ini;
+      "Library/Application Support/Firefox/Profiles/default/user.js".source = ./app-configs/firefox/user.js;
+      "Library/Application Support/Firefox/Profiles/nightly/user.js".source = ./app-configs/firefox/user.js;
     };
   };
 
