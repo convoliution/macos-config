@@ -163,7 +163,7 @@ in
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
-    initExtraBeforeCompInit = ''
+    initContent = lib.mkOrder 550 ''
       bindkey \^U backward-kill-line
     '';
     shellAliases = {
