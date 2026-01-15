@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let
+  username = "mika";
   sshPath = "${config.home.homeDirectory}/.ssh/id_ed25519";
 in
 {
@@ -13,8 +14,8 @@ in
   home = {
     stateVersion = "24.05";  # DO NOT CHANGE
 
-    username = "mika";
-    homeDirectory = "/Users/mika";
+    inherit username;
+    homeDirectory = "/Users/${username}";
 
     sessionPath = [
       "$HOME/.local/bin"

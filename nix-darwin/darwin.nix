@@ -1,6 +1,9 @@
 { config, lib, ... }:
+let
+  username = "mika";
+in
 {
-  system.primaryUser = "mika";
+  system.primaryUser = username;
 
   system.defaults = {
     NSGlobalDomain = {
