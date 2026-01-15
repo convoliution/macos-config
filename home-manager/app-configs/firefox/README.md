@@ -1,4 +1,4 @@
-Unfortunately there are things I would've liked to configure but cannot:
+There are things I would've liked to configure but unfortunately cannot:
 
 - set default and alternative search engines to just DuckDuckGo
 - customize toolbar
