@@ -123,7 +123,7 @@ in
   '';
   targets.darwin.defaults = {
     "com.apple.screencapture" = {
-      location = "~/Pictures/Screenshots";
+      location = "${config.home.homeDirectory}/Pictures/Screenshots";
       show-thumbnail = false;
     };
   };
