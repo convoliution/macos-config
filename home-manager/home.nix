@@ -134,6 +134,7 @@ in
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "GitHub" = {
         host = "github.com";
