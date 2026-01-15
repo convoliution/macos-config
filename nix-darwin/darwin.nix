@@ -61,4 +61,9 @@
       EnableStandardClickToShowDesktop = false;
     };
   };
+
+  programs = {
+    bash.enable = false;
+    zsh.enable = false;
+  };
 }
