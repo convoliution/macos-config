@@ -2,6 +2,8 @@
 
 ## Dependencies
 
+### GitHub SSH
+
 1. generate SSH key for laptop
    ```zsh
    ssh-keygen -t ed25519 -C "email@provider.tld"
@@ -24,6 +26,9 @@
    ```zsh
    ssh -T git@github.com
    ```
+
+### Nix
+
 1. [install Nix](https://zero-to-nix.com/start)
    ```zsh
    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
