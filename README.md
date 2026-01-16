@@ -53,7 +53,7 @@
 1. apply configuration
    ```zsh
    rm -f ~/.ssh/config
-   home-manager switch
+   home-manager switch --flake path:$HOME/.config/home-manager
    ```
 1. install VS Code extensions
     - bbenoist.nix
@@ -76,5 +76,5 @@
 1. set variables at the top of `darwin.nix`
 1. apply configuration
     ```zsh
-    sudo -H nix run nix-darwin/nix-darwin-25.05#darwin-rebuild --  switch --flake path:$HOME/.config/nix-darwin
+    sudo -H nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake path:$HOME/.config/nix-darwin
     ```
