@@ -18,5 +18,8 @@
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "mypy.runUsingActiveInterpreter": true,
-  "ruff.importStrategy": "fromEnvironment"
+  "ruff.importStrategy": "fromEnvironment",
+  "terminal.integrated.env.osx": {
+    "__ETC_PROFILE_NIX_SOURCED": null
+  }
 }
