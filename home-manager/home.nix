@@ -42,9 +42,11 @@ in
         plugins = pydantic.mypy
       '';
 
-      "Library/Application Support/Code/User/settings.json".source = ./app-configs/vs-code/settings.json;
+      "Library/Application Support/Code/User/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/app-configs/vs-code/settings.json";
       "Library/Application Support/Code/User/keybindings.json".source = ./app-configs/vs-code/keybindings.json;
-      "Library/Application Support/Code - Insiders/User/settings.json".source = ./app-configs/vs-code/settings.json;
+      "Library/Application Support/Code - Insiders/User/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/app-configs/vs-code/settings.json";
       "Library/Application Support/Code - Insiders/User/keybindings.json".source = ./app-configs/vs-code/keybindings.json;
 
       "Library/Application Support/Firefox/installs.ini".source = ./app-configs/firefox/installs.ini;
