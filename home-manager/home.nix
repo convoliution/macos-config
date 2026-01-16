@@ -138,13 +138,15 @@ in
     enable = true;
     enableDefaultConfig = false;
     matchBlocks = {
-      "GitHub" = {
-        host = "github.com";
-        identityFile = sshPath;
+      "*" = {
         extraOptions = {
           AddKeysToAgent = "yes";
           UseKeychain = "yes";
         };
+      };
+      "GitHub" = {
+        host = "github.com";
+        identityFile = sshPath;
       };
     };
   };
