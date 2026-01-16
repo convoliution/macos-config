@@ -60,11 +60,15 @@
    rm -f ~/.ssh/config
    home-manager switch --flake path:$HOME/.config/home-manager
    ```
-1. install VS Code extensions
-    - bbenoist.nix
-    - ms-python.python
-    - matangover.mypy
-    - charliermarsh.ruff
+1. [install Firefox](https://www.firefox.com/en-CA/download/all/)
+   1. configure search preferences
+   1. customize toolbar
+1. [install VS Code](https://code.visualstudio.com/download)
+   1. install VS Code extensions
+      - bbenoist.nix
+      - ms-python.python
+      - matangover.mypy
+      - charliermarsh.ruff
 
 ## [nix-darwin](https://nix-darwin.github.io/nix-darwin/manual/index.html)
 
