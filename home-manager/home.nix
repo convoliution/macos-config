@@ -33,6 +33,8 @@ in
       gnumake
       wget
 
+      yt-dlp
+
       nixpkgs-fmt
     ];
 
