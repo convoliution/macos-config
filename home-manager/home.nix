@@ -35,6 +35,7 @@ in
 
       yt-dlp
 
+      ffmpeg-full
       nixpkgs-fmt
     ];
 
