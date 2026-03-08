@@ -59,6 +59,24 @@ in
     };
   };
 
+  launchd.agents.ssh-load-keychain = {
+    enable = true;
+    config = {
+      ProgramArguments = [ "/usr/bin/ssh-add" "--apple-load-keychain" ];
+      RunAtLoad = true;
+    };
+  };
+
+  home.activation.createScreenshotsDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.home.homeDirectory}/Pictures/Screenshots
+  '';
+  targets.darwin.defaults = {
+    "com.apple.screencapture" = {
+      location = "${config.home.homeDirectory}/Pictures/Screenshots";
+      show-thumbnail = false;
+    };
+  };
+
   programs.git = {
     enable = true;
     settings = {
@@ -175,24 +193,6 @@ in
     '';
     shellAliases = {
       python3 = "python";
-    };
-  };
-
-  launchd.agents.ssh-load-keychain = {
-    enable = true;
-    config = {
-      ProgramArguments = [ "/usr/bin/ssh-add" "--apple-load-keychain" ];
-      RunAtLoad = true;
-    };
-  };
-
-  home.activation.createScreenshotsDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.home.homeDirectory}/Pictures/Screenshots
-  '';
-  targets.darwin.defaults = {
-    "com.apple.screencapture" = {
-      location = "${config.home.homeDirectory}/Pictures/Screenshots";
-      show-thumbnail = false;
     };
   };
 }
