@@ -46,6 +46,7 @@ user_pref("network.trr.uri", "https://mozilla.cloudflare-dns.com/dns-query");
 user_pref("doh-rollout.disable-heuristics", true);
 
 // general behavior
+user_pref("browser.warnOnQuit", false);
 user_pref("browser.tabs.warnOnClose", true);
 user_pref("browser.bookmarks.showMobileBookmarks", false);
 user_pref("browser.link.open_newwindow.override.external", 7);  // open links from apps next to active tab
