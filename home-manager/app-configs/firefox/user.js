@@ -20,6 +20,7 @@ user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
 user_pref("browser.urlbar.placeholderName.private", "DuckDuckGo");
 user_pref("browser.search.region", "US");
 user_pref("browser.search.suggest.enabled", false);
+user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.openpage", false);
