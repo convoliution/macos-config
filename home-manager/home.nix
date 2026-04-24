@@ -39,6 +39,7 @@ in
 
       # media
       ffmpeg-full
+      gallery-dl
       yt-dlp
 
       (writeShellApplication {
@@ -52,24 +53,24 @@ in
       (writeShellApplication {
         name = "medial";
         text = ''
-          urls=$(mktemp)
-          vim "$urls"
+          outdir=$(date +%Y-%m-%d)
+          mkdir -p "$outdir"
 
+          urls="''${outdir}/$(date +%H-%M-%S)-urls.txt"
+          vim "$urls"
           if [[ ! -s "$urls" ]]; then
-              rm "$urls"
+              rm -f "$urls"
               echo "No URLs entered. Exiting."
               exit 0
           fi
 
-          mkdir -p .downloaded
-          yt-dlp -f "bestvideo+bestaudio/best" \
-              -o ".downloaded/%(uploader)s-%(id)s.%(ext)s" \
+          downloads=$(mktemp -d)
+          gallery-dl \
+              -D "''${downloads}" \
+              -f "{username}-{media_id}.{extension}" \
               --cookies-from-browser firefox \
-              -a "$urls"
-
-          outdir=$(date +%Y-%m-%d)
-          mkdir -p "$outdir"
-          for f in .downloaded/*; do
+              --input-file "$urls"
+          for f in "''${downloads}"/*; do
               mime=$(file --mime-type -b "$f")
               if [[ "$mime" == video/* ]]; then
                   basename_f=$(basename "$f")
@@ -79,8 +80,6 @@ in
                   cp "$f" "''${outdir}/$(basename "$f")"
               fi
           done
-
-          rm -r .downloaded
           rm "$urls"
         '';
       })
