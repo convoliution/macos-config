@@ -39,6 +39,7 @@ in
 
       # media
       ffmpeg-full
+      gallery-dl
       yt-dlp
 
       (writeShellApplication {
@@ -46,6 +47,65 @@ in
         text = ''
           nix flake update --flake path:"$HOME"/.config/home-manager
           home-manager switch --flake path:"$HOME"/.config/home-manager
+        '';
+      })
+
+      (writeShellApplication {
+        name = "medial";
+        text = ''
+          outdir=$(date +%Y-%m-%d)
+          mkdir -p "$outdir"
+
+          # prompt user for URLs
+          urls="''${outdir}/$(date +%H-%M-%S)-urls.txt"
+          vim "$urls"
+          if [[ ! -s "$urls" ]]; then
+              rm -f "$urls"
+              echo "No URLs entered. Exiting."
+              exit 0
+          fi
+
+          # attempt download using gallery-dl
+          downloads=$(mktemp -d)
+          failed_urls=$(mktemp)
+          while read -r url; do
+              if ! gallery-dl \
+                  --directory "''${downloads}" \
+                  --filename "{username|author[name]|author[handle]|blog[name]|author}-{id|tweet_id|post_id|media_id}-{num:>02}.{extension}" \
+                  --cookies-from-browser firefox \
+                  "$url"
+              then
+                  echo "$url" >> "''${failed_urls}"
+              fi
+          done < "$urls"
+
+          # attempt download using yt-dlp
+          if [[ -s "''${failed_urls}" ]]; then
+              success_urls=$(mktemp)
+              yt-dlp \
+                  --paths "''${downloads}" \
+                  --output "%(uploader)s-%(id)s.%(ext)s" \
+                  --cookies-from-browser firefox \
+                  --ignore-errors \
+                  --print-to-file "after_video:%(webpage_url)s" "''${success_urls}" \
+                  --batch-file "''${failed_urls}"
+              grep -vxFf "''${success_urls}" "''${failed_urls}" > "''${outdir}/failed.txt" || true
+              rm "''${success_urls}"
+          fi
+          rm "''${failed_urls}"
+
+          # normalize videos' format
+          for f in "''${downloads}"/*; do
+              mime=$(file --mime-type -b "$f")
+              if [[ "$mime" == video/* ]]; then
+                  basename_f=$(basename "$f")
+                  name="''${basename_f%.*}"
+                  ffmpeg -i "$f" -vcodec libx264 -pix_fmt yuv420p "''${outdir}/''${name}.mp4"
+              elif [[ "$mime" == image/* ]]; then
+                  cp "$f" "''${outdir}/$(basename "$f")"
+              fi
+          done
+          rm "$urls"
         '';
       })
     ];
