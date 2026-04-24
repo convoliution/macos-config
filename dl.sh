@@ -1,11 +1,19 @@
 #!/bin/zsh
 set -euo pipefail
 
+urls=$(mktemp)
+vim "$urls"
+
+if [[ ! -s "$urls" ]]; then
+    rm "$urls"
+    exit 0
+fi
+
 mkdir -p .downloaded
 yt-dlp -f "bestvideo+bestaudio/best" \
     -o ".downloaded/%(uploader)s-%(id)s.%(ext)s" \
     --cookies-from-browser firefox \
-    -a urls.txt
+    -a "$urls"
 
 mkdir -p .out
 for f in .downloaded/*; do
@@ -20,4 +28,4 @@ done
 
 mv .out/* .
 rm -r .downloaded .out
-rm urls.txt
+rm "$urls"
