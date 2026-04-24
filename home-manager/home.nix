@@ -25,18 +25,21 @@ in
     ];
 
     packages = with pkgs; [
+      # data processing
       jq
       yq
-
-      uv
-
-      gnumake
       wget
 
-      yt-dlp
-
-      ffmpeg-full
+      # development
+      gnumake
       nixpkgs-fmt
+
+      # package managers
+      uv
+
+      # media
+      ffmpeg-full
+      yt-dlp
 
       (writeShellApplication {
         name = "home-manage";
