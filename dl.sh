@@ -6,6 +6,7 @@ vim "$urls"
 
 if [[ ! -s "$urls" ]]; then
     rm "$urls"
+    echo "No URLs entered. Exiting."
     exit 0
 fi
 
@@ -15,17 +16,17 @@ yt-dlp -f "bestvideo+bestaudio/best" \
     --cookies-from-browser firefox \
     -a "$urls"
 
-mkdir -p .out
+outdir=$(date +%Y-%m-%d)
+mkdir -p "$outdir"
 for f in .downloaded/*; do
     mime=$(file --mime-type -b "$f")
     if [[ "$mime" == video/* ]]; then
         name="${$(basename "$f")%.*}"
-        ffmpeg -i "$f" -vcodec libx264 -pix_fmt yuv420p -an ".out/${name}.mp4"
+        ffmpeg -i "$f" -vcodec libx264 -pix_fmt yuv420p -an "${outdir}/${name}.mp4"
     elif [[ "$mime" == image/* ]]; then
-        cp "$f" ".out/$(basename "$f")"
+        cp "$f" "${outdir}/$(basename "$f")"
     fi
 done
 
-mv .out/* .
-rm -r .downloaded .out
+rm -r .downloaded
 rm "$urls"
