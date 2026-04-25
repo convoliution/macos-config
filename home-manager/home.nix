@@ -38,7 +38,7 @@ in
       uv
 
       # media
-      ffmpeg-full
+      ffmpeg
       gallery-dl
       yt-dlp
 
