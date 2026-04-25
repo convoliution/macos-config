@@ -89,7 +89,10 @@ in
                   --ignore-errors \
                   --print-to-file "after_video:%(webpage_url)s" "''${success_urls}" \
                   --batch-file "''${failed_urls}"
-              grep -vxFf "''${success_urls}" "''${failed_urls}" > "''${outdir}/failed.txt" || true
+              remaining=$(grep -vxFf "''${success_urls}" "''${failed_urls}" || true)
+              if [[ -n "$remaining" ]]; then
+                  echo "$remaining" > "''${outdir}/failed.txt"
+              fi
               rm "''${success_urls}"
           fi
           rm "''${failed_urls}"
@@ -100,7 +103,7 @@ in
               if [[ "$mime" == video/* ]]; then
                   filename=$(basename "$f")
                   name="''${filename%.*}"
-                  ffmpeg -i "$f" -c:v libx265 -crf 18 -pix_fmt yuv420p -tag:v hvc1 -c:a aac "''${outdir}/''${name}.mp4"
+                  ffmpeg -loglevel error -i "$f" -c:v libx265 -crf 18 -pix_fmt yuv420p -tag:v hvc1 -c:a aac "''${outdir}/''${name}.mp4"
               elif [[ "$mime" == image/* ]]; then
                   cp "$f" "''${outdir}/$(basename "$f")"
               fi
