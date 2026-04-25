@@ -98,9 +98,9 @@ in
           for f in "''${downloads}"/*; do
               mime=$(file --mime-type -b "$f")
               if [[ "$mime" == video/* ]]; then
-                  basename_f=$(basename "$f")
-                  name="''${basename_f%.*}"
-                  ffmpeg -i "$f" -vcodec libx264 -pix_fmt yuv420p "''${outdir}/''${name}.mp4"
+                  filename=$(basename "$f")
+                  name="''${filename%.*}"
+                  ffmpeg -i "$f" -c:v libx265 -crf 18 -pix_fmt yuv420p -tag:v hvc1 -c:a aac "''${outdir}/''${name}.mp4"
               elif [[ "$mime" == image/* ]]; then
                   cp "$f" "''${outdir}/$(basename "$f")"
               fi
