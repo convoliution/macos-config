@@ -85,6 +85,7 @@ in
               yt-dlp \
                   --paths "''${downloads}" \
                   --output "%(uploader)s-%(id)s.%(ext)s" \
+                  --ffmpeg-location "$(which ffmpeg)" \
                   --cookies-from-browser firefox \
                   --ignore-errors \
                   --print-to-file "after_video:%(webpage_url)s" "''${success_urls}" \
