@@ -24,6 +24,12 @@ in
       "$HOME/.local/bin"
     ];
 
+    sessionVariables = {
+      # disable macOS shell history management
+      # to fix VS Code's integrated terminal hanging
+      SHELL_SESSION_DID_INIT = "1";
+    };
+
     packages = with pkgs; [
       # data processing
       jq
