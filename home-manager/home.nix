@@ -261,16 +261,13 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        extraOptions = {
-          AddKeysToAgent = "yes";
-          UseKeychain = "yes";
-        };
+        AddKeysToAgent = "yes";
+        UseKeychain = "yes";
       };
-      "GitHub" = {
-        host = "github.com";
-        identityFile = sshPath;
+      "github.com" = {
+        IdentityFile = sshPath;
       };
     };
   };
