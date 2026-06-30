@@ -84,13 +84,21 @@ in
     };
   };
 
-  launchd.agents.ssh-load-keychain = {
-    enable = true;
-    config = {
-      ProgramArguments = [ "/usr/bin/ssh-add" "--apple-load-keychain" ];
-      RunAtLoad = true;
+  launchd.agents.ssh-load-keychain =
+    let
+      loader = pkgs.writeShellScript "ssh-load-keychain" ''
+        sleep 60
+        export SSH_AUTH_SOCK="$(/bin/launchctl getenv SSH_AUTH_SOCK)"
+        exec /usr/bin/ssh-add --apple-load-keychain
+      '';
+    in
+    {
+      enable = true;
+      config = {
+        ProgramArguments = [ "${loader}" ];
+        RunAtLoad = true;
+      };
     };
-  };
 
   home.activation.createScreenshotsDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.home.homeDirectory}/Pictures/Screenshots
