@@ -16,6 +16,9 @@ fi
 downloads=$(mktemp -d)
 failed_urls=$(mktemp)
 while read -r url; do
+    if [[ -z "$url" ]]; then
+        continue
+    fi
     if ! gallery-dl \
         --directory "${downloads}" \
         --filename "{username|author[name]|author[handle]|blog[name]|author}-{id|tweet_id|post_id|media_id}-{num:>02}.{extension}" \
