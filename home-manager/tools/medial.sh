@@ -1,8 +1,10 @@
-outdir=$(date +%Y-%m-%d)
-mkdir -p "$outdir"
+if [[ -e "medial-failed.txt" ]]; then
+    echo "medial-failed.txt found. Please resolve before re-running." >&2
+    exit 1
+fi
 
 # prompt user for URLs
-urls="${outdir}/$(date +%H-%M-%S)-urls.txt"
+urls="$(date +%H-%M-%S)-urls.txt"
 vim "$urls"
 if [[ ! -s "$urls" ]]; then
     rm -f "$urls"
@@ -34,10 +36,10 @@ if [[ -s "${failed_urls}" ]]; then
         --cookies-from-browser firefox \
         --ignore-errors \
         --print-to-file "after_video:%(webpage_url)s" "${success_urls}" \
-        --batch-file "${failed_urls}"
+        --batch-file "${failed_urls}" || true
     remaining=$(grep -vxFf "${success_urls}" "${failed_urls}" || true)
     if [[ -n "$remaining" ]]; then
-        echo "$remaining" > "${outdir}/failed.txt"
+        echo "$remaining" > "medial-failed.txt"
     fi
     rm "${success_urls}"
 fi
@@ -49,9 +51,9 @@ for f in "${downloads}"/*; do
     if [[ "$mime" == video/* ]]; then
         filename=$(basename "$f")
         name="${filename%.*}"
-        ffmpeg -loglevel error -i "$f" -c:v libx265 -crf 18 -pix_fmt yuv420p -tag:v hvc1 -c:a aac "${outdir}/${name}.mp4"
+        ffmpeg -loglevel error -i "$f" -c:v libx265 -crf 18 -pix_fmt yuv420p -tag:v hvc1 -c:a aac "${name}.mp4"
     elif [[ "$mime" == image/* ]]; then
-        cp "$f" "${outdir}/$(basename "$f")"
+        cp "$f" "$(basename "$f")"
     fi
 done
 rm "$urls"
