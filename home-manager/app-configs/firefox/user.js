@@ -53,7 +53,8 @@ user_pref("browser.bookmarks.showMobileBookmarks", false);
 user_pref("browser.link.open_newwindow.override.external", 7);  // open links from apps next to active tab
 user_pref("findbar.highlightAll", true);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
-user_pref("sidebar.visibility", "hide-sidebar");
+user_pref("sidebar.revamp", false);
+user_pref("sidebar.visibility", "hide-on-close");
 
 // developer tools
 user_pref("devtools.command-button-screenshot.enabled", true);
