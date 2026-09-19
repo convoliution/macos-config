@@ -15,7 +15,8 @@
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.startupEditor": "none",
   "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSaveMode": "modificationsIfAvailable"
   },
   "mypy.runUsingActiveInterpreter": true,
   "ruff.importStrategy": "fromEnvironment",
